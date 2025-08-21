@@ -7,8 +7,7 @@ import youtube from "../public/imgs/youtube.png";
 import { IoSearch } from "react-icons/io5";
 import { LuList } from "react-icons/lu";
 
-export default function Header() {
-  const [menu, setMenu] = React.useState(false);
+export default function Header({ menu, setMenu }) {
   const handelmenuo = (e) => {
     e.preventDefault();
     setMenu(!menu);
