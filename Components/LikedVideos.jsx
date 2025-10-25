@@ -107,43 +107,49 @@ export const LikedVideos = () => {
       </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {loading
-          ? Array(6)
-              .fill(0)
-              .map((_, i) => <VideoSkeleton key={i} />)
-          : videos.map((video) => (
-              <div
-                key={video.id}
-                onClick={() => handleSelectVideo(video)}
-                className="bg-white shadow rounded-2xl overflow-hidden hover:shadow-lg transition-shadow duration-200 cursor-pointer"
-              >
-                <img
-                  src={video.thumbnail}
-                  alt={video.title}
-                  className="w-full h-48 object-cover"
-                />
-                <div className="p-4">
-                  <h2 className="font-bold text-lg line-clamp-2">
-                    {video.title}
-                  </h2>
-                  <p className="text-sm text-gray-500 mt-1">
-                    {video.views} • {video.likes} • {video.timeAgo}
-                  </p>
-                  <div className="flex items-center gap-2 mt-2">
-                    {video.channel.avatar && (
-                      <img
-                        src={video.channel.avatar}
-                        alt={video.channel.name}
-                        className="w-6 h-6 rounded-full"
-                      />
-                    )}
-                    <span className="text-sm text-gray-700">
-                      {video.channel.name}
-                    </span>
-                  </div>
+        {loading ? (
+          Array(6)
+            .fill(0)
+            .map((_, i) => <VideoSkeleton key={i} />)
+        ) : videos.length === 0 ? (
+          <div className="col-span-full text-center text-gray-500 py-10">
+            There is no video you like yet.
+          </div>
+        ) : (
+          videos.map((video) => (
+            <div
+              key={video.id}
+              onClick={() => handleSelectVideo(video)}
+              className="bg-white shadow rounded-2xl overflow-hidden hover:shadow-lg transition-shadow duration-200 cursor-pointer"
+            >
+              <img
+                src={video.thumbnail}
+                alt={video.title}
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-4">
+                <h2 className="font-bold text-lg line-clamp-2">
+                  {video.title}
+                </h2>
+                <p className="text-sm text-gray-500 mt-1">
+                  {video.views} • {video.likes} • {video.timeAgo}
+                </p>
+                <div className="flex items-center gap-2 mt-2">
+                  {video.channel.avatar && (
+                    <img
+                      src={video.channel.avatar}
+                      alt={video.channel.name}
+                      className="w-6 h-6 rounded-full"
+                    />
+                  )}
+                  <span className="text-sm text-gray-700">
+                    {video.channel.name}
+                  </span>
                 </div>
               </div>
-            ))}
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
