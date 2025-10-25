@@ -49,9 +49,7 @@ const ChannelDetailsView = ({ selectedChannel, handleBack }) => {
         }
       } catch (error) {
         console.error("Error fetching channel videos:", error);
-        // لا نضع setLoading(false)، يبقى skeleton شغال
-        // ويمكن إعادة المحاولة بعد فترة قصيرة
-        setTimeout(fetchChannelVideos, 3000); // إعادة المحاولة كل 3 ثواني
+        setTimeout(fetchChannelVideos, 3000);
       }
     };
 
